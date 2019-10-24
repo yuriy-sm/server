@@ -39,40 +39,37 @@
     </div>
 
 <!-- This div to display data that is recieved from databese or from user -->
-    <div class="containerTester">
-            <p><b>Content from the form</b></p>
-        <div class="answer">
-            <!-- <p id="answer"></p> -->
-            <!-- Table to display JSON file -->
-            <table style="width:100%">
-                <tr>
-                  <th>Firstname</th>
-                  <th>Lastname</th>
-                  <th>Age</th>
-                </tr>
-                <tr>
-                  <td>Jill</td>
-                  <td>Smith</td>
-                  <td>50</td>
-                </tr>
-                <tr>
-                  <td>Eve</td>
-                  <td>Jackson</td>
-                  <td>94</td>
-                </tr>
-              </table>
+<div class="containerTester">
+    <p><b>Content from the form</b></p>
+    <p id="answer"></p>
+    <div class="tableView">
+        <!-- <p id="answer"></p> -->
+        <!-- Table to display JSON file -->
+        <table id="tableForm">
+            <tr id="tableContent">
+                <th>Name</th>
+                <th>Email</th>
+                <th>Message</th>
+            </tr>
+        </table>
 
-        </div>
+
     </div>
+</div>
+<!-- End of table to display JSON file -->
+
 <!-- footer of the website -->
-    <div class="container">
-        <p><b>Get data from server</b></p>
-        <button onclick="getData()">GET DATA</button>
-        <div class="footer">
-            <p id="demo"></p>
+<div class="container">
+    <p><b>Get data from server</b></p>
+    <button onclick="getTestData()">GET DATA from test server</button>
+    <button onclick="getData()">GET DATA from Mango server</button>
+    <div class="footer">
+        <p id="demo"></p>
+        <p id="demoTest"></p>
+        
 
-        </div>
     </div>
+</div>
 
 </body>
 
