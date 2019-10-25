@@ -1,38 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-{% load static %}  <!-- allows to add files from static folder-->
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Search Project</title>
-    <link rel="stylesheet" type="text/css" href="../static/style/style.css">
+    <link rel="stylesheet" type="text/css" href="style/style.css">
     <link rel="stylesheet" type="text/css" href="style/playWithStyle.css">
     <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Alegreya Sans'>
-</head>
+    <script src="data.js"></script>
+    <script src="main.js"></script>
+    </head>
 
 <body>
     <header>
         <div class="container">
             <div class="logo">
-                <img src="../static/images/Logo.png" width="100" height="50" alt="" title="">
+                <img src="images/Logo.png" width="100" height="50" alt="" title="">
             </div>
             <nav>
-                <a class="active" href="../">Search Project</a>
-                <a href="../addproject">Add Project</a>
-                <a href="../instructions">Instructions</a>
-                <a href="../about">About</a>
+                <a class="active" href="index.html">Search Project</a>
+                <a href="pages/AddProject.html">Add Project</a>
+                <a href="pages/Instructions.html">Instructions</a>
+                <a href="pages/About.html">About</a>
             </nav>
         </div>
     </header>
 <!-- search button START -->
-    <div class="container">
-            <form class="searchMenu">
-            <input type="text" placeholder="Enter text...">   
-            <button type="search">Search</button>
-            </form>
-        </div>
+<div class="container">
+    <form class="searchMenu">
+    <input type="text" placeholder="Enter text...">   
+    <button type="search">Search</button>
+    </form>
+</div>
 <!-- search button FINISH -->
 
     <!-- This div to display data that is recieved from databese or from user -->
@@ -41,7 +42,7 @@
         <div class="tableView">
             <!-- <p id="answer"></p> -->
             <!-- Table to display JSON file -->
-            <table onload="MakeTable()" id="tableProject">
+            <table id="tableProject">
                 <tr>
                     <th>Project Name</th>
                     <th>Year</th>

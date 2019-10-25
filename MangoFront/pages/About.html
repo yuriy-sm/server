@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>About</title>
+    <script src="../data.js"></script>
+    <script src="../main.js"></script>
+    <link rel="stylesheet" type="text/css" href="../style/style.css">
+    <link rel="stylesheet" type="text/css" href="../style/playWithStyle.css">
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Alegreya Sans'>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="../images/Logo.png" width="100" height="50" alt="" title="">
+            </div>
+            <nav>
+                <a href="../index.html">Search Project</a>
+                <a href="AddProject.html">Add Project</a>
+                <a href="Instructions.html">Instructions</a>
+                <a class="active" href="About.html">About</a>
+            </nav>
+        </div>
+    </header>
+    <div class="container">
+        <p><b>Contact us form</b></p>
+        <!-- Here we will have a contact us form torecieve data from user-->
+        <div class="ContactUs">
+            Name: <input type="text" id="Name" name="Name" value="Mickey"><br>
+            Email: <input type="text" id="Email" name="Email" value="mouse@mail.com"><br>
+            Message: <input type="text" id="Message" name="Message" value="Thisis my message for this form submit"><br>
+            <button onclick="contactUs()">Submit</button>
+        </div>
+    </div>
+
+
+    <!-- This div to display data that is recieved from databese or from user -->
+    <div class="containerTester">
+        <p><b>Content from the form</b></p>
+        <p id="answer"></p>
+        <div class="tableView">
+            <!-- <p id="answer"></p> -->
+            <!-- Table to display JSON file -->
+            <table id="tableForm">
+                <tr id="tableContent">
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Message</th>
+                </tr>
+            </table>
+
+
+        </div>
+    </div>
+    <!-- End of table to display JSON file -->
+
+    <!-- footer of the website -->
+    <div class="container">
+        <p><b>Get data from server</b></p>
+        <button onclick="getData()">GET DATA</button>
+        <div class="footer">
+            <p id="demo"></p>
+
+        </div>
+    </div>
+    
+</body>
+
+</html>

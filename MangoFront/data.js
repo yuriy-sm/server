@@ -1,113 +1,4 @@
-//contact us form sublission in about page START
-function contactUs() {
-  //save data from the form fields in the JS object
-  let data1 = {
-    name: document.getElementById("Name").value,
-    email: document.getElementById("Email").value,
-    message: document.getElementById("Message").value
-  }
-  //show information from form in console
-  console.log(data1);
-  //display confirmation that form submitted
-  document.getElementById("answer").innerHTML = (data1.name + ", thank you for submittin our form");
-
-  //add information from the form to table
-  let tableForm = document.getElementById("tableForm");
-  let  row = tableForm.insertRow(1),
-    name = row.insertCell(0),
-    email = row.insertCell(1),
-    message = row.insertCell(2);
-  name.innerHTML = (data1.name);
-  email.innerHTML = (data1.email);
-  message.innerHTML = (data1.message);
-  //create headers for the table
-
-
-  //convert data to the JSON file
-  myJSON = JSON.stringify(data1);
-  console.log(myJSON);
-
-  //sent data to server
-  var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
-  xmlhttp.open("POST", "http://127.0.0.1:8000/MangoAbout/");
-  xmlhttp.setRequestHeader("Content-Type", "application/json");
-  xmlhttp.send(myJSON);
-  //save data to local storage
-  localStorage.setItem("testJSON", myJSON);
-}
-//attempt to retrive data from the local storage - IT IS NOT WORKING
-// text = localStorage.getItem("testJSON");
-// obj = JSON.parse(text);
-// console.log(obj);
-// document.getElementById("demo").innerHTML = obj.name;
-
-//testing GET method to retrive data from server
-
-function getData() {
-  var Http = new XMLHttpRequest();
-  var url = 'http://127.0.0.1:8000/MangoAbout/?limit=10&ordering=email&search=';
-  Http.open("GET", url);
-  Http.send();
-
-  Http.onreadystatechange = (e) => {
-    var checkData = JSON.parse(Http.responseText);
-    console.log(checkData);
-
-    //List each item in the array - version 3 working
-    checkData.forEach(showData);
-    function showData(item, index) {
-      const pe = document.createElement("p");
-      pe.innerHTML = ("Id: " + index + "<br>Email: " + item.email + "<br>message: " + item.message + "<br>name: " + item.name);
-      document.querySelector('#demo').append(pe);
-    }
-  }
-  // keys for the array elements: item.body, item.id, item.title, item.userId
-}
-//function to recieve data from learning server
-function getTestData(){
-  //testing GET method to retrive data from server
-  const Http = new XMLHttpRequest();
-  const url = 'https://jsonplaceholder.typicode.com/posts';
-  Http.open("GET", url);
-  Http.send();
-  Http.onreadystatechange = (e) => {
-    var checkData = JSON.parse(Http.responseText);
-    console.log(checkData);
-
-    //List each item in the array - version 3 working
-    checkData.forEach(showData);
-    function showData(item, index) {
-      const pe = document.createElement("p");
-      pe.innerHTML = ("Id: " + index + "<br>Body: " + item.body + "<br>Item Id: " + item.id + "<br>Title: " + item.title + "<br>User Id: " + item.userId);
-      document.querySelector('#demoTest').append(pe);
-    }
-    // keys for the array elements: item.body, item.id, item.title, item.userId
-  }
-}
-//***display data from database in the table START
-//projData is located in file data.js
-// ****Create table START******
-// var TableContactForm = '';
-// var rows = 5;
-// var columns = 3;
-// for (var r = 0; r < rows; r++){
-//   TableContactForm += '<tr>';
-//   for (var c = 1; c <= columns; c++){
-//     TableContactForm += '<td>' + c + '</td>';
-//   }
-//   TableContactForm += '</tr>';
-//   TableContactForm += '<tr>';
-//   for (var c = 1; c <= columns; c++){
-//     TableContactForm += '<td>' + c + '</td>';
-//   }
-//   TableContactForm += '</tr>';
-// }
-// document.getElementById("tableContent").innerHTML = document.write('<table id="tableProject">' + TableContactForm + '</table>');
-
-// ****Create table FINISH******
-//***display data from database in the table END
-
-var dataP = [
+var data = [
   {
     "Id": 421,
     "Project name": "Test1",
@@ -551,20 +442,21 @@ var dataP = [
   }
 ];
 
-var projData = JSON.parse(JSON.stringify(dataP));
+var projData = JSON.parse(JSON.stringify(data));
 
 //display datat from Object in console
 //console.log(data);
 
-//Add data to search page when page is loading start this function
-function MakeTable() {
+//when page is loading start this function
+window.onload = function () {
   //create table for each element in array
   let tableForm = document.getElementById("tableProject"),
     row = tableForm.insertRow(1),
     name = row.insertCell(0),
     email = row.insertCell(1),
     message = row.insertCell(2);
-  name.innerHTML = (dataP[0].Id);
-  email.innerHTML = (dataP[0].Year);
-  message.innerHTML = (dataP[0].Description);
+  name.innerHTML = (data[0].Id);
+  email.innerHTML = (data[0].Year);
+  message.innerHTML = (data[0].Description);
 }
+
