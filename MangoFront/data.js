@@ -6,7 +6,7 @@ var data = [
     "Start date": "01-01-2011",
     "End date": "",
     "Category": "",
-    "Description": "Here will be description to the project.\nMain goals:\ngoal 1\ngoal 2\nMore description related to the project. Some inpartant information and some not wery inmportant info.\nAlso Here will be some milistones and other interesting comments. Just need to add here more text with different formatings.\nMaybe will add another list:\nlist item 1\nlist item 2\nlist item 3",
+    "Description": "bla bla Here will be description to the project.\nMain goals:\ngoal 1\ngoal 2\nMore description related to the project. Some inpartant information and some not wery inmportant info.\nAlso Here will be some milistones and other interesting comments. Just need to add here more text with different formatings.\nMaybe will add another list:\nlist item 1\nlist item 2\nlist item 3",
     "Folder": "",
     "Project Manager": "Project Manager 1\nProject Manager 2, Project Manager 3",
     "Type": "",
@@ -450,13 +450,61 @@ var projData = JSON.parse(JSON.stringify(data));
 //when page is loading start this function
 window.onload = function () {
   //create table for each element in array
-  let tableForm = document.getElementById("tableProject"),
-    row = tableForm.insertRow(1),
-    name = row.insertCell(0),
-    email = row.insertCell(1),
-    message = row.insertCell(2);
-  name.innerHTML = (data[0].Id);
-  email.innerHTML = (data[0].Year);
-  message.innerHTML = (data[0].Description);
+  for (i = 0; i < Object.keys(data).length; i++ ){
+    let tableForm = document.getElementById("tableProject"),
+      row = tableForm.insertRow(1),
+      name = row.insertCell(0),
+      email = row.insertCell(1),
+      message = row.insertCell(2);
+    name.innerHTML = (data[i].Id);
+    email.innerHTML = (data[i].Year);
+    message.innerHTML = (data[i].Description);
+  }
+}
+//check columns for search in table
+function checkAll(){
+  document.getElementById("filterProjectName").checked = true;
+  document.getElementById("filterYear").checked = true;
+  document.getElementById("filterDescription").checked = true;
 }
 
+//uncheck columns for search in table
+function uncheckAll(){
+  document.getElementById("filterProjectName").checked = false;
+  document.getElementById("filterYear").checked = false;
+  document.getElementById("filterDescription").checked = false;
+}
+//Searching for items in table START
+function SearchFeature(){
+  var input, filter, table, tr, td, i, txtValue, filterValue;
+  if (document.getElementById("filterProjectName").checked == true) {
+    filterValue = 0;
+  } else if (document.getElementById("filterYear").checked == true) {
+        filterValue = 1;
+  } else if (  document.getElementById("filterDescription").checked == true){
+    filterValue = 2;
+  } else {
+    window.alert("Choose filter");
+  }
+  console.log(filterValue);
+
+  input = document.getElementById("inputSearch");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("tableProject");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[filterValue];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+}
+// Tip: Remove toUpperCase() if you want to perform a case-sensitive search.
+
+// Tip: Change tr[i].getElementsByTagName('td')[0] to [1] if you want to search for "Country" (index 1) instead of "Name" (index 0).
+//Searching for items in table FINISH
