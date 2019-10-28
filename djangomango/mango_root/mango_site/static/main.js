@@ -29,24 +29,18 @@ function contactUs() {
 
   //sent data to server
   var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
-  xmlhttp.open("POST", "http://127.0.0.1:8000/MangoAbout/");
+  xmlhttp.open("POST", "/MangoAbout");
   xmlhttp.setRequestHeader("Content-Type", "application/json");
   xmlhttp.send(myJSON);
   //save data to local storage
   localStorage.setItem("testJSON", myJSON);
 }
-//attempt to retrive data from the local storage - IT IS NOT WORKING
-// text = localStorage.getItem("testJSON");
-// obj = JSON.parse(text);
-// console.log(obj);
-// document.getElementById("demo").innerHTML = obj.name;
 
-//testing GET method to retrive data from server
-
+//retrive data from mango server
 function getData() {
   var Http = new XMLHttpRequest();
-  var url = 'http://127.0.0.1:8000/MangoAbout/?limit=10&ordering=email&search=';
-  Http.open("GET", url);
+  var url = 'http://127.0.0.1:8000/MangoAbout/?limit=5';
+  Http.open("GET", url, true);
   Http.send();
 
   Http.onreadystatechange = (e) => {
@@ -56,9 +50,17 @@ function getData() {
     //List each item in the array - version 3 working
     checkData.forEach(showData);
     function showData(item, index) {
-      const pe = document.createElement("p");
-      pe.innerHTML = ("Id: " + index + "<br>Email: " + item.email + "<br>message: " + item.message + "<br>name: " + item.name);
-      document.querySelector('#demo').append(pe);
+      let tableForm = document.getElementById("tableForm");
+      let  row = tableForm.insertRow(1),
+        name = row.insertCell(0),
+        email = row.insertCell(1),
+        message = row.insertCell(2);
+      name.innerHTML = (index);
+      email.innerHTML = (item.results[0]);
+      message.innerHTML = (item.title);
+    // const pe = document.createElement("p");
+    // pe.innerHTML = ("Id: " + index + "<br>Email: " + item.email + "<br>message: " + item.message + "<br>name: " + item.name);
+    // document.querySelector('#demo').append(pe);
     }
   }
   // keys for the array elements: item.body, item.id, item.title, item.userId
@@ -77,9 +79,14 @@ function getTestData(){
     //List each item in the array - version 3 working
     checkData.forEach(showData);
     function showData(item, index) {
-      const pe = document.createElement("p");
-      pe.innerHTML = ("Id: " + index + "<br>Body: " + item.body + "<br>Item Id: " + item.id + "<br>Title: " + item.title + "<br>User Id: " + item.userId);
-      document.querySelector('#demoTest').append(pe);
+      let tableForm = document.getElementById("tableForm");
+      let  row = tableForm.insertRow(1),
+        name = row.insertCell(0),
+        email = row.insertCell(1),
+        message = row.insertCell(2);
+      name.innerHTML = (index);
+      email.innerHTML = (item.body);
+      message.innerHTML = (item.title);
     }
     // keys for the array elements: item.body, item.id, item.title, item.userId
   }
@@ -107,7 +114,8 @@ function getTestData(){
 // ****Create table FINISH******
 //***display data from database in the table END
 
-var dataP = [
+//####################################DATA>JS CODE##############################
+var projectsData = [
   {
     "Id": 421,
     "Project name": "Test1",
@@ -115,7 +123,7 @@ var dataP = [
     "Start date": "01-01-2011",
     "End date": "",
     "Category": "",
-    "Description": "Here will be description to the project.\nMain goals:\ngoal 1\ngoal 2\nMore description related to the project. Some inpartant information and some not wery inmportant info.\nAlso Here will be some milistones and other interesting comments. Just need to add here more text with different formatings.\nMaybe will add another list:\nlist item 1\nlist item 2\nlist item 3",
+    "Description": "bla bla Here will be description to the project.\nMain goals:\ngoal 1\ngoal 2\nMore description related to the project. Some inpartant information and some not wery inmportant info.\nAlso Here will be some milistones and other interesting comments. Just need to add here more text with different formatings.\nMaybe will add another list:\nlist item 1\nlist item 2\nlist item 3",
     "Folder": "",
     "Project Manager": "Project Manager 1\nProject Manager 2, Project Manager 3",
     "Type": "",
@@ -550,21 +558,69 @@ var dataP = [
     "Circulation": "500 egz."
   }
 ];
+var projData = JSON.parse(JSON.stringify(projectsData));
 
-var projData = JSON.parse(JSON.stringify(dataP));
+//display projectsDatat from Object in console
+//console.log(projectsData);
 
-//display datat from Object in console
-//console.log(data);
-
-//Add data to search page when page is loading start this function
-function MakeTable() {
+//when page is loading start this function
+window.onload = function () {
   //create table for each element in array
-  let tableForm = document.getElementById("tableProject"),
-    row = tableForm.insertRow(1),
-    name = row.insertCell(0),
-    email = row.insertCell(1),
-    message = row.insertCell(2);
-  name.innerHTML = (dataP[0].Id);
-  email.innerHTML = (dataP[0].Year);
-  message.innerHTML = (dataP[0].Description);
+  for (i = 0; i < Object.keys(projectsData).length; i++) {
+    let tableForm = document.getElementById("tableProject"),
+      row = tableForm.insertRow(1),
+      name = row.insertCell(0),
+      email = row.insertCell(1),
+      message = row.insertCell(2);
+    name.innerHTML = (projectsData[i].Id);
+    email.innerHTML = (projectsData[i].Year);
+    message.innerHTML = (projectsData[i].Description);
+  }
 }
+//check columns for search in table
+function checkAll() {
+  document.getElementById("filterProjectName").checked = true;
+  document.getElementById("filterYear").checked = true;
+  document.getElementById("filterDescription").checked = true;
+}
+
+//uncheck columns for search in table
+function uncheckAll() {
+  document.getElementById("filterProjectName").checked = false;
+  document.getElementById("filterYear").checked = false;
+  document.getElementById("filterDescription").checked = false;
+}
+//Searching for items in table START
+function SearchFeature() {
+  var input, filter, table, tr, td, i, txtValue, filterValue;
+  if (document.getElementById("filterProjectName").checked == true) {
+    filterValue = 0;
+  } else if (document.getElementById("filterYear").checked == true) {
+    filterValue = 1;
+  } else if (document.getElementById("filterDescription").checked == true) {
+    filterValue = 2;
+  } else {
+    window.alert("Choose filter");
+  }
+  console.log(filterValue);
+
+  input = document.getElementById("inputSearch");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("tableProject");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[filterValue];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+}
+// Tip: Remove toUpperCase() if you want to perform a case-sensitive search.
+
+// Tip: Change tr[i].getElementsByTagName('td')[0] to [1] if you want to search for "Country" (index 1) instead of "Name" (index 0).
+//Searching for items in table FINISH

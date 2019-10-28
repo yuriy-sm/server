@@ -121,3 +121,10 @@ tr:hover {
 }
 
 /*Table style END*/
+
+.containerTester {
+    background-color: rgb(231, 231, 231);
+    max-width: 960px;
+    width: 96%;
+    margin: auto;
+}

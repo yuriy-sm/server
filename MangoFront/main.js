@@ -28,8 +28,39 @@ function contactUs() {
   console.log(myJSON);
 }
 
+//sent data to server
+var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
+xmlhttp.open("POST", "http://127.0.0.1:8000/MangoAbout/");
+xmlhttp.setRequestHeader("Content-Type", "application/json");
+xmlhttp.send(myJSON);
+//save data to local storage
+localStorage.setItem("testJSON", myJSON);
+}
+
+//retrive data from mango server
+function getData() {
+var Http = new XMLHttpRequest();
+var url = 'http://127.0.0.1:8000/MangoAbout/?limit=10&ordering=email&search=';
+Http.open("GET", url);
+Http.send();
+
+Http.onreadystatechange = (e) => {
+  var checkData = JSON.parse(Http.responseText);
+  console.log(checkData);
+
+  //List each item in the array - version 3 working
+  checkData.forEach(showData);
+  function showData(item, index) {
+    const pe = document.createElement("p");
+    pe.innerHTML = ("Id: " + index + "<br>Email: " + item.email + "<br>message: " + item.message + "<br>name: " + item.name);
+    document.querySelector('#demo').append(pe);
+  }
+}
+// keys for the array elements: item.body, item.id, item.title, item.userId
+}
+
 //function to recieve data from learning server
-function getData(){
+function getTestData(){
   //testing GET method to retrive data from server
   const Http = new XMLHttpRequest();
   const url = 'https://jsonplaceholder.typicode.com/posts';
@@ -42,9 +73,14 @@ function getData(){
     //List each item in the array - version 3 working
     checkData.forEach(showData);
     function showData(item, index) {
-      const pe = document.createElement("p");
-      pe.innerHTML = ("Id: " + index + "<br>Body: " + item.body + "<br>Item Id: " + item.id + "<br>Title: " + item.title + "<br>User Id: " + item.userId);
-      document.querySelector('#demo').append(pe);
+      let tableForm = document.getElementById("tableForm");
+      let  row = tableForm.insertRow(1),
+        name = row.insertCell(0),
+        email = row.insertCell(1),
+        message = row.insertCell(2);
+      name.innerHTML = (index);
+      email.innerHTML = (item.body);
+      message.innerHTML = (item.title);
     }
     // keys for the array elements: item.body, item.id, item.title, item.userId
   }

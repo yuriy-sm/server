@@ -8,7 +8,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Search Project</title>
     <link rel="stylesheet" type="text/css" href="../static/style/style.css">
-    <link rel="stylesheet" type="text/css" href="style/playWithStyle.css">
     <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Alegreya Sans'>
 </head>
 
@@ -27,13 +26,20 @@
         </div>
     </header>
 <!-- search button START -->
-    <div class="container">
-            <form class="searchMenu">
-            <input type="text" placeholder="Enter text...">   
-            <button type="search">Search</button>
-            </form>
-        </div>
-<!-- search button FINISH -->
+<div class="container">
+        <p>Choose filter</p>
+         <input id="filterProjectName" type="checkbox" name="projectNameColumn" value="Project Name"> Project Name
+         <input id="filterYear" type="checkbox" name="yearColumn" value="Year"> Year
+         <input id="filterDescription" type="checkbox" name="DescriptionColumn" value="Description"> Description
+         <button onclick="checkAll()" type="button">Check all</button>
+         <button onclick="uncheckAll()" type="button">Unheck all</button>
+     
+         <div class="searchMenu">
+         <input onkeyup="SearchFeature()" id="inputSearch" type="text" placeholder="Enter text...">   
+         <button onclick="SearchFeature()" type="button">Search</button>
+         </div>
+     </div>
+     <!-- search button FINISH -->
 
     <!-- This div to display data that is recieved from databese or from user -->
     <div class="containerTester">
@@ -41,12 +47,13 @@
         <div class="tableView">
             <!-- <p id="answer"></p> -->
             <!-- Table to display JSON file -->
-            <table onload="MakeTable()" id="tableProject">
-                <tr>
-                    <th>Project Name</th>
-                    <th>Year</th>
-                    <th>Description</th>
-            </table>
+            <table id="tableProject">
+                    <tr>
+                        <th>Project Name</th>
+                        <th>Year</th>
+                        <th>Description</th>
+                    </tr>
+                </table>
         </div>
     </div>
     <!-- End of table to display JSON file -->

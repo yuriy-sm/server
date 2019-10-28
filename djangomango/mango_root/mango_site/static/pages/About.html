@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-{% load static %} - <!-- allows to add files from static folder-->
+{% load static %} -
+<!-- allows to add files from static folder-->
 
 <head>
     <meta charset="UTF-8">
@@ -35,42 +36,34 @@
             Email: <input type="text" id="Email" name="Email" value="Mango@go.com"><br>
             Message: <input type="text" id="Message" name="Message" value="Have fun*****************"><br>
             <button onclick="contactUs()">Submit</button>
+            <p><b>Get data from server</b></p>
+            <button onclick="getTestData()">GET DATA from test server</button>
+            <button onclick="getData()">GET DATA from Mango server</button>
         </div>
     </div>
-
-<!-- This div to display data that is recieved from databese or from user -->
-<div class="containerTester">
-    <p><b>Content from the form</b></p>
-    <p id="answer"></p>
-    <div class="tableView">
-        <!-- <p id="answer"></p> -->
-        <!-- Table to display JSON file -->
-        <table id="tableForm">
-            <tr id="tableContent">
-                <th>Name</th>
-                <th>Email</th>
-                <th>Message</th>
-            </tr>
-        </table>
-
-
+    <!-- This div to display data that is recieved from databese or from user -->
+    <div class="containerTester">
+        <p><b>Content from the form</b></p>
+        <p id="answer"></p>
+        <div class="tableView">
+            <!-- <p id="answer"></p> -->
+            <!-- Table to display JSON file -->
+            <table id="tableForm">
+                <tr id="tableContent">
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Message</th>
+                </tr>
+            </table>
+        </div>
     </div>
-</div>
-<!-- End of table to display JSON file -->
+    <!-- End of table to display JSON file -->
 
-<!-- footer of the website -->
-<div class="container">
-    <p><b>Get data from server</b></p>
-    <button onclick="getTestData()">GET DATA from test server</button>
-    <button onclick="getData()">GET DATA from Mango server</button>
-    <div class="footer">
-        <p id="demo"></p>
-        <p id="demoTest"></p>
-        
-
+    <!-- footer of the website -->
+    <div class="container">
+        <div class="footer">
+        </div>
     </div>
-</div>
-
 </body>
 
 </html>

@@ -1,4 +1,4 @@
-var data = [
+var projectsData = [
   {
     "Id": 421,
     "Project name": "Test1",
@@ -441,47 +441,46 @@ var data = [
     "Circulation": "500 egz."
   }
 ];
+var projData = JSON.parse(JSON.stringify(projectsData));
 
-var projData = JSON.parse(JSON.stringify(data));
-
-//display datat from Object in console
-//console.log(data);
+//display projectsDatat from Object in console
+//console.log(projectsData);
 
 //when page is loading start this function
 window.onload = function () {
   //create table for each element in array
-  for (i = 0; i < Object.keys(data).length; i++ ){
+  for (i = 0; i < Object.keys(projectsData).length; i++) {
     let tableForm = document.getElementById("tableProject"),
       row = tableForm.insertRow(1),
       name = row.insertCell(0),
       email = row.insertCell(1),
       message = row.insertCell(2);
-    name.innerHTML = (data[i].Id);
-    email.innerHTML = (data[i].Year);
-    message.innerHTML = (data[i].Description);
+    name.innerHTML = (projectsData[i].Id);
+    email.innerHTML = (projectsData[i].Year);
+    message.innerHTML = (projectsData[i].Description);
   }
 }
 //check columns for search in table
-function checkAll(){
+function checkAll() {
   document.getElementById("filterProjectName").checked = true;
   document.getElementById("filterYear").checked = true;
   document.getElementById("filterDescription").checked = true;
 }
 
 //uncheck columns for search in table
-function uncheckAll(){
+function uncheckAll() {
   document.getElementById("filterProjectName").checked = false;
   document.getElementById("filterYear").checked = false;
   document.getElementById("filterDescription").checked = false;
 }
 //Searching for items in table START
-function SearchFeature(){
+function SearchFeature() {
   var input, filter, table, tr, td, i, txtValue, filterValue;
   if (document.getElementById("filterProjectName").checked == true) {
     filterValue = 0;
   } else if (document.getElementById("filterYear").checked == true) {
-        filterValue = 1;
-  } else if (  document.getElementById("filterDescription").checked == true){
+    filterValue = 1;
+  } else if (document.getElementById("filterDescription").checked == true) {
     filterValue = 2;
   } else {
     window.alert("Choose filter");
@@ -501,7 +500,7 @@ function SearchFeature(){
       } else {
         tr[i].style.display = "none";
       }
-    }       
+    }
   }
 }
 // Tip: Remove toUpperCase() if you want to perform a case-sensitive search.
