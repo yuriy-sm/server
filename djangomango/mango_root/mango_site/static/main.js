@@ -42,27 +42,28 @@ function getData() {
   var url = 'http://127.0.0.1:8000/MangoAbout/?limit=5';
   Http.open("GET", url, true);
   Http.send();
-
-  Http.onreadystatechange = (e) => {
-    var checkData = JSON.parse(Http.responseText);
-    console.log(checkData);
-
-    //List each item in the array - version 3 working
-    checkData.forEach(showData);
-    function showData(item, index) {
-      let tableForm = document.getElementById("tableForm");
-      let  row = tableForm.insertRow(1),
-        name = row.insertCell(0),
-        email = row.insertCell(1),
-        message = row.insertCell(2);
-      name.innerHTML = (index);
-      email.innerHTML = (item.results[0]);
-      message.innerHTML = (item.title);
-    // const pe = document.createElement("p");
-    // pe.innerHTML = ("Id: " + index + "<br>Email: " + item.email + "<br>message: " + item.message + "<br>name: " + item.name);
-    // document.querySelector('#demo').append(pe);
+    Http.onreadystatechange = (e) => {
+      // if (this.readyState ==4 && this.status == 200){
+      var checkData = JSON.parse(Http.responseText);
+      console.log(typeof(checkData.results[3]));
+          //List each item in the array - version 3 working
+          var x="", index;
+          for ( index in checkData.results){
+        x += checkData.results[index].name;
+        let tableForm = document.getElementById("tableForm"),
+            row = tableForm.insertRow(1),
+            name = row.insertCell(0),
+            email = row.insertCell(1),
+            message = row.insertCell(2);
+        name.innerHTML = (checkData.results[index].name);
+        email.innerHTML = (checkData.results[index].email);
+        message.innerHTML = (checkData.results[index].message);
+      }
+      document.getElementById("demo").innerHTML = x;
+  //   } else {
+  //     document.getElementById("demo").innerHTML = "Server is not responding";
+  // } 
     }
-  }
   // keys for the array elements: item.body, item.id, item.title, item.userId
 }
 //function to recieve data from learning server
