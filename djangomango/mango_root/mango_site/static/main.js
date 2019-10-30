@@ -29,11 +29,11 @@ function contactUs() {
 
   //sent data to server
   var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
-  xmlhttp.open("POST", "/MangoAbout");
+  xmlhttp.open("POST", "http://127.0.0.1:8000/MangoAbout/", true);
   xmlhttp.setRequestHeader("Content-Type", "application/json");
   xmlhttp.send(myJSON);
   //save data to local storage
-  localStorage.setItem("testJSON", myJSON);
+ // localStorage.setItem("testJSON", myJSON);
 }
 
 //retrive data from mango server
@@ -66,6 +66,34 @@ function getData() {
     }
   // keys for the array elements: item.body, item.id, item.title, item.userId
 }
+//search data in contact us table using get and post requests
+function SearchInContactUsForm(){
+var SearchInput;
+SearchInput = document.getElementById("SearchInput").value;
+console.log(SearchInput);
+const Http = new XMLHttpRequest();
+const url = "http://127.0.0.1:8000/MangoAbout/?offset=&search=";
+Http.open("GET", url + SearchInput, true);
+Http.send();
+Http.onreadystatechange = function (){
+var readyData = JSON.parse(Http.responseText);
+  console.log(readyData);
+//List each item in the array - version 3 working
+var x="", index;
+for ( index in readyData.results){
+x += readyData.results[index].name;
+let tableForm = document.getElementById("tableForm"),
+  row = tableForm.insertRow(1),
+  name = row.insertCell(0),
+  email = row.insertCell(1),
+  message = row.insertCell(2);
+name.innerHTML = (readyData.results[index].name);
+email.innerHTML = (readyData.results[index].email);
+message.innerHTML = (readyData.results[index].message);
+}
+}
+}
+
 //function to recieve data from learning server
 function getTestData(){
   //testing GET method to retrive data from server

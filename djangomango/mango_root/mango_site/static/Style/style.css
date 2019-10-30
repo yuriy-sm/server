@@ -61,6 +61,10 @@ nav a.active{
     box-sizing: border-box;
   }
 /* Style the search box inside the search menu */
+.searchMenu {
+    margin-top:20px;
+    margin-bottom:90px;
+   }
 .searchMenu input[type=text] {
     padding: 10px;
     font-size: 17px;

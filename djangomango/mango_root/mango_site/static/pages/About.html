@@ -32,9 +32,9 @@
         <p><b>Contact us form</b></p>
         <!-- Here we will have a contact us form torecieve data from user-->
         <div class="ContactUs">
-            Name: <input type="text" id="Name" name="Name" value="Yurii"><br>
-            Email: <input type="text" id="Email" name="Email" value="Mango@go.com"><br>
-            Message: <input type="text" id="Message" name="Message" value="Have fun*****************"><br>
+            Name: <input type="text" id="Name" name="Name" value="Banana"><br>
+            Email: <input type="text" id="Email" name="Email" value="Horse@go.com"><br>
+            Message: <input type="text" id="Message" name="Message" value="grass is green"><br>
             <button onclick="contactUs()">Submit</button>
             <p><b>Get data from server</b></p>
             <button onclick="getTestData()">GET DATA from test server</button>
@@ -46,7 +46,12 @@
         <p><b>Content from the form</b></p>
         <p id="answer"></p>
         <p id="demo"></p>
-
+        <div class="searchMenu">
+                <!-- onkeyup="SearchInContactUsForm()" -->
+            <input id="SearchInput" type="text" placeholder="Enter text...">   
+            <button onclick="SearchInContactUsForm()" type="button">Search</button>
+            <p id="forTest"></p>    
+        </div>
         <div class="tableView">
             <!-- <p id="answer"></p> -->
             <!-- Table to display JSON file -->
