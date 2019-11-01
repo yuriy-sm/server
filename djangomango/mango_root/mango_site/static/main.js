@@ -42,10 +42,9 @@ function getData() {
   var url = 'http://127.0.0.1:8000/MangoAbout/?limit=5';
   Http.open("GET", url, true);
   Http.send();
-    Http.onreadystatechange = (e) => {
-      // if (this.readyState ==4 && this.status == 200){
+    Http.onreadystatechange = function() {
+      if (this.readyState ==4 && this.status == 200){
       var checkData = JSON.parse(Http.responseText);
-      console.log(typeof(checkData.results[3]));
           //List each item in the array - version 3 working
           var x="", index;
           for ( index in checkData.results){
@@ -60,10 +59,10 @@ function getData() {
         message.innerHTML = (checkData.results[index].message);
       }
       document.getElementById("demo").innerHTML = x;
-  //   } else {
-  //     document.getElementById("demo").innerHTML = "Server is not responding";
-  // } 
-    }
+    } else {
+      document.getElementById("demo").innerHTML = "Server is not responding";
+  } 
+    };
   // keys for the array elements: item.body, item.id, item.title, item.userId
 }
 //search data in contact us table using get and post requests
